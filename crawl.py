@@ -1,6 +1,14 @@
 import urllib.request
 from bs4 import BeautifulSoup
 from random import randint
+import sys
+
+if len(sys.argv) != 2:
+    print("Usage: python3 crawl.py <filepath>")
+    exit(1)
+
+filepath = sys.argv[1]
+
 
 headers = {
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11",
@@ -44,7 +52,6 @@ soup = BeautifulSoup(wallpaper_html_raw, "html.parser")
 # find a tag with class 'js-download-a-tag'
 download_button = soup.find("a", class_="js-download-a-tag")
 download_url = base_url + download_button["href"]
-print(download_url)
 
 # download the image
 req = urllib.request.Request(
@@ -54,6 +61,7 @@ req = urllib.request.Request(
 with urllib.request.urlopen(req) as url:
     wallpaper_raw = url.read()
 
-# save the image
-with open("wallpaper.jpg", "wb") as f:
+
+# save the image and make readable for everyone
+with open(filepath, "wb") as f:
     f.write(wallpaper_raw)
