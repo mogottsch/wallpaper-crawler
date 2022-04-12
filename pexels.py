@@ -25,7 +25,7 @@ def get_wallpaper_urls():
     soup = BeautifulSoup(wallpaper_overview_html_raw, "html.parser")
 
     # find article tags with class 'photo-item'
-    wallpaper_tags = soup.find_all("article", class_="photo-item")
+    wallpaper_tags = soup.find_all("article", class_="MediaCard_card__PAVEg")
 
     # get the first url in each tag
     wallpaper_urls = [tag.find("a")["href"] for tag in wallpaper_tags]
