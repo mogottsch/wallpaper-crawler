@@ -18,6 +18,7 @@ print(f"Found {len(wallpaper_urls)} wallpapers")
 tmp_filepath = "/tmp/wallpaper.jpg"
 for i in range(MAX_RETRIES):
     wallpaper_url = get_random_wallpaper_url(wallpaper_urls)
+    print(f"Downloading {wallpaper_url}")
     wallpaper_raw = download_wallpaper(wallpaper_url)
 
     with open(tmp_filepath, "wb") as f:

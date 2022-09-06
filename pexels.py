@@ -48,9 +48,22 @@ def download_wallpaper(url):
 
     soup = BeautifulSoup(wallpaper_html_raw, "html.parser")
 
-    # find a tag with class 'js-download-a-tag'
-    download_button = soup.find("a", class_="js-download-a-tag")
-    download_url = base_url + download_button["href"]
+    download_text = soup.find(text="Free download")
+    if not download_text:
+        raise ValueError(f"Could not find download button on {url}")
+    parent = download_text.parent
+    if not parent:
+        raise ValueError(f"Could not find download button on {url}")
+    parent = parent.parent
+    if not parent:
+        raise ValueError(f"Could not find download button on {url}")
+    parent = parent.parent
+    if not parent:
+        raise ValueError(f"Could not find download button on {url}")
+    download_url = parent["href"]
+
+    if not isinstance(download_url, str):
+        raise ValueError(f"Download url is not a string: {download_url}")
 
     # download the image
     req = urllib.request.Request(
