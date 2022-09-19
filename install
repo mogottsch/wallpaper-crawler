@@ -1,2 +1,12 @@
-git clone git@github.com:AlexeyAB/darknet.git
-wget -O yolov3.weights https://pjreddie.com/media/files/yolov3.weights
+#!/bin/bash
+
+echo "Preparing darknet..."
+# git clone git@github.com:AlexeyAB/darknet.git
+# wget -O yolov3.weights https://pjreddie.com/media/files/yolov3.weights
+echo "Finished preparing darknet."
+
+echo "Creating conda environment..."
+conda env create --name wallpaper-crawler2 --file env.txt
+echo "Finished creating conda environment."
+
+echo "Run with python crawl.py <out.jpg>"
